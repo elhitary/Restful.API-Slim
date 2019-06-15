@@ -129,10 +129,10 @@ $app->put('/api/customer/update/{id}', function(Request $request, Response $resp
 		echo '{"error": {"text": '.$e->getMessage().'}';
 	}
 });
-/*
+
 // Delete Customer
 $app->delete('/api/customer/delete/{id}', function(Request $request, Response $response){
-    $user_id = $request->getAttribute('user_id');
+    $user_id = $request->getAttribute('id');
     $sql = "DELETE FROM customers WHERE user_id = $user_id";
     try{
         // Get DB Object
@@ -147,4 +147,3 @@ $app->delete('/api/customer/delete/{id}', function(Request $request, Response $r
         echo '{"error": {"text": '.$e->getMessage().'}';
     }
 });
-*/
