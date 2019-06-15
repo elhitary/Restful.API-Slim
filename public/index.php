@@ -1,23 +1,26 @@
 <?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', 'on');
+
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-
-require '../vendor/autoload.php';
-// config array
-
+require __DIR__ . "/../vendor/autoload.php";
+require __DIR__ . "/../config/db.php";
 $config['displayErrorDetails'] = true;
-$config['addContentLengthHeader'] = false;
 
-$config['db']['host'] = 'localhost';
-$config['db']['user'] = 'root';
-$config['db']['pass'] = 'root';
-$config['db']['dbname'] = 'myDB';
+$app = new \Slim\App(["settings" => $config]);
+$container = $app->getContainer();
 
-$app = new \Slim\App(['settings' => $config]);
+$app = new \Slim\App;
 $app->get('/hello/{name}', function (Request $request, Response $response, array $args) {
-	    $name = $args['name'];
-		    $response->getBody()->write("Hello, $name");
+	$name = $args['name'];
+	$response->getBody()->write("Hello, $name");
 
-		    return $response;
+	return $response;
 });
+
+// customer routes
+require __DIR__ . '/customers.php';
+
 $app->run();
