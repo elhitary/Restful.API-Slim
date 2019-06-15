@@ -84,3 +84,67 @@ $app->post('/api/customer/add', function(Request $request, Response $response){
 		echo '{"error": {"text": '.$e->getMessage().'}';
 	}
 });
+
+// update customer
+
+$app->put('/api/customer/update/{id}', function(Request $request, Response $response){
+
+	$user_id = $request->getAttribute('id'); 
+	$username = $request->getParam('username');
+	$first_name = $request->getParam('first_name');
+    $last_name = $request->getParam('last_name');
+    $gender = $request->getParam('gender');
+    $password = $request->getParam('password');
+    $status = $request->getParam('status');
+
+	$sql = "UPDATE customers SET
+				username 	= :username,
+				first_name 	= :first_name,
+				last_name 	= :last_name,
+                gender		= :gender,
+                password	= :password,
+                status 		= :status
+			WHERE user_id = $user_id";
+
+	try{
+		// Get DB Object
+		$db = new db();
+		//connect
+		$db = $db->connect();
+
+		$stmt = $db->prepare($sql);
+
+		$stmt->bindParam(':username', 	$username);
+		$stmt->bindParam(':first_name', $first_name);
+		$stmt->bindParam(':last_name', 	$last_name);
+		$stmt->bindParam(':gender', 	$gender);
+		$stmt->bindParam(':password', 	$password);
+		$stmt->bindParam(':status', 	$status);
+
+		$stmt->execute();
+
+		echo '{"notice": {"text": "Customer Added"}';
+
+	} catch(PDOException $e){
+		echo '{"error": {"text": '.$e->getMessage().'}';
+	}
+});
+/*
+// Delete Customer
+$app->delete('/api/customer/delete/{id}', function(Request $request, Response $response){
+    $user_id = $request->getAttribute('user_id');
+    $sql = "DELETE FROM customers WHERE user_id = $user_id";
+    try{
+        // Get DB Object
+        $db = new db();
+        // Connect
+        $db = $db->connect();
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $db = null;
+        echo '{"notice": {"text": "Customer Deleted"}';
+    } catch(PDOException $e){
+        echo '{"error": {"text": '.$e->getMessage().'}';
+    }
+});
+*/
