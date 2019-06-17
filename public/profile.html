@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>API</title>
+	<script>
+		window.addEventListener('load', function () {
+			const	uname = document.getElementById('uname');
+			const	xhr = new XMLHttpRequest();
+			xhr.addEventListener('load', function (event) {
+				try {
+					const	user = JSON.parse(event.target.responseText)[0];
+					console.log(user);
+					uname.innerHTML = user.username;
+				}
+				catch (e) {
+					console.log(e.message);
+				}
+			});
+			xhr.open('GET', '/api/customer/546', true);
+			xhr.send();
+		});
+	</script>
+</head>
+<body>
+	<div class="profile">
+		<div>
+			<span id="uname"></span>
+		</div>
+	</div>
+</body>
+</html>

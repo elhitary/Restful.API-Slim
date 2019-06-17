@@ -12,14 +12,6 @@ $config['displayErrorDetails'] = true;
 $app = new \Slim\App(["settings" => $config]);
 $container = $app->getContainer();
 
-$app = new \Slim\App;
-$app->get('/hello/{name}', function (Request $request, Response $response, array $args) {
-	$name = $args['name'];
-	$response->getBody()->write("Hello, $name");
-
-	return $response;
-});
-
 // customer routes
 require __DIR__ . '/../src/routes/customers.php';
 
