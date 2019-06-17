@@ -6,7 +6,7 @@ ini_set('display_errors', 'on');
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 require __DIR__ . "/../vendor/autoload.php";
-require __DIR__ . "/../config/db.php";
+require __DIR__ . "/../src/config/db.php";
 $config['displayErrorDetails'] = true;
 
 $app = new \Slim\App(["settings" => $config]);
@@ -21,6 +21,6 @@ $app->get('/hello/{name}', function (Request $request, Response $response, array
 });
 
 // customer routes
-require __DIR__ . '/customers.php';
+require __DIR__ . '/../src/routes/customers.php';
 
 $app->run();
