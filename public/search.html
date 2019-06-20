@@ -5,12 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Search</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script></script>
+    <script>
+        function validate() {
+            return (!isNaN(document.getElementById('id').value));
+        }
+    </script>
 </head>
 <body>
-    <form action="/profile.html" method="get">
-        user id : <input type="text" name="id"><br>
-        <input type="submit" value="Submit">
+    <form action="/profile.html" method="get" name="myform" onsubmit="return (validate());">
+        userr id : <input type="text" id="id" name="id"><br>
+        <input type="submit" value="submit" >
       </form>
 </body>
 </html>
