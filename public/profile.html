@@ -4,19 +4,32 @@
 	<title>API</title>
 	<script>
 		window.addEventListener('load', function () {
+
 			const	uname = document.getElementById('uname');
+			const	fname = document.getElementById('fname');
+			const	lname = document.getElementById('lname');
+			const	gender = document.getElementById('gender');
+			const	password = document.getElementById('password');
+			const	status = document.getElementById('status');
+			
 			const	xhr = new XMLHttpRequest();
 			xhr.addEventListener('load', function (event) {
 				try {
 					const	user = JSON.parse(event.target.responseText)[0];
-					console.log(user);
+					let c = "ds";
 					uname.innerHTML = user.username;
+					fname.innerHTML = user.first_name;
+					lname.innerHTML = user.last_name;
+					gender.innerHTML = user.gender;
+					password.innerHTML = user.password;
+					status.innerHTML = user.status;
+					
 				}
 				catch (e) {
 					console.log(e.message);
 				}
 			});
-			xhr.open('GET', '/api/customer/546', true);
+			xhr.open('GET', '/api/customer/1', true);
 			xhr.send();
 		});
 	</script>
@@ -24,7 +37,28 @@
 <body>
 	<div class="profile">
 		<div>
+			<span>username : </span>
 			<span id="uname"></span>
+		</div>
+		<div>
+			<span>first name : </span>
+			<span id="fname"></span>
+		</div>
+		<div>
+			<span>last name : </span>
+			<span id="lname"></span>
+		</div>
+		<div>
+			<span>gender : </span>
+			<span id="gender"></span>
+		</div>
+		<div>
+			<span>password : </span>
+			<span id="password"></span>
+		</div>
+		<div>
+			<span>status : </span>
+			<span id="status"></span>
 		</div>
 	</div>
 </body>
