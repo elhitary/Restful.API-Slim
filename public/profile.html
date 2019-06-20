@@ -29,7 +29,10 @@
 					console.log(e.message);
 				}
 			});
-			xhr.open('GET', '/api/customer/1', true);
+			var urlParams = new URLSearchParams(window.location.search);
+			var param = urlParams.get('id');
+			var req = '/api/customer/' + param;
+			xhr.open('GET', req, true);
 			xhr.send();
 		});
 	</script>
